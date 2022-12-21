@@ -9,7 +9,7 @@ public class GridTest : MonoBehaviour
 
     void Start()
     {
-        grid = new(8, 8, 10f, Vector3.zero, (grid, x, y) => new SpecialGridObject(grid, x, y));
+        grid = new(8, 8, 10f, transform.position, (grid, x, y) => new SpecialGridObject(grid, x, y));
     }
 
     private void Update()
