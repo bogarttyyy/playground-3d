@@ -39,7 +39,7 @@ public class Grid<T> where T : IGridObject
             {
                 for (int j = 0; j < gridArray.GetLength(1); j++)
                 {
-                    debugTextArray[i, j] = CreateWorldText(gridArray[i, j].GetDebugDisplay(), null, GetWorldPosition(i, j) + new Vector3(cellSize, cellSize) * .5f, 20, null, TextAnchor.MiddleCenter);
+                    debugTextArray[i, j] = CommonHelper.CreateWorldText(gridArray[i, j].GetDebugDisplay(), null, GetWorldPosition(i, j) + (new Vector3(cellSize, cellSize) * .5f), 20, null, TextAnchor.MiddleCenter);
 
                     Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i, j + 1), Color.white, 100f);
                     Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i + 1, j), Color.white, 100f);
@@ -91,37 +91,24 @@ public class Grid<T> where T : IGridObject
         y = Mathf.FloorToInt(worldPosition.y / cellSize);
     }
 
-    #region Helpers
-
-    private Vector3 GetWorldPosition(int x, int y)
+    public Vector3 GetWorldPosition(int x, int y)
     {
         return (new Vector3(x, y) * cellSize) + origin;
     }
 
-    private static TextMesh CreateWorldText(string text, Transform parent = null, Vector3 localPosition = default, int fontSize = 40, Color? color = null, TextAnchor textAnchor = TextAnchor.UpperLeft, TextAlignment textAlignment = TextAlignment.Left, int sortingOrder = 5000)
+    internal int GetWidth()
     {
-        if (!color.HasValue)
-        {
-            color = Color.white;
-        }
-        return CreateWorldText(parent, text, localPosition, fontSize, color.Value, textAnchor, textAlignment, sortingOrder);
+        return gridArray.GetLength(0);
     }
 
-    private static TextMesh CreateWorldText(Transform parent, string text, Vector3 localPosition, int fontSize, Color color, TextAnchor textAnchor, TextAlignment alignment, int sortingOrder)
+    internal int GetHeight()
     {
-        GameObject gameObject = new GameObject("World_Text", typeof(TextMesh));
-        Transform transform = gameObject.transform;
-        transform.SetParent(parent, false);
-        transform.localPosition = localPosition;
-        TextMesh textMesh = gameObject.GetComponent<TextMesh>();
-        textMesh.anchor = textAnchor;
-        textMesh.color = color;
-        textMesh.fontSize = fontSize;
-        textMesh.text = text;
-        textMesh.alignment = alignment;
-        textMesh.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
+        return gridArray.GetLength(1);
+    }
 
-        return textMesh;
+    internal float GetCellSize()
+    {
+        return cellSize;
     }
 
     public class OnGridChangeEventArgs : EventArgs
@@ -129,8 +116,6 @@ public class Grid<T> where T : IGridObject
         public int x;
         public int y;
     }
-
-    #endregion
 }
 
 public interface IGridObject
