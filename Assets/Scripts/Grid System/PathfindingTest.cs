@@ -39,7 +39,7 @@ public class PathfindingTest : MonoBehaviour
                 for (int i = 0; i < path.Count - 1; i++)
                 {
                     Vector3 factor = Vector3.one * 5f;
-                    Debug.DrawLine(new Vector3(path[i].x, path[i].y) * 10f + factor, new Vector3(path[i + 1].x, path[i + 1].y) * 10f + factor, Color.green, 100f);
+                    Debug.DrawLine(new Vector3(path[i].x, path[i].y) * 10f + factor, new Vector3(path[i + 1].x, path[i + 1].y) * 10f + factor, Color.green, 5f);
                 }
             }
 

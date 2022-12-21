@@ -55,4 +55,9 @@ public class PathNode : IGridObject
     {
         return new Vector3(x, y);
     }
+
+    internal void SetIsWalkable(bool v)
+    {
+        isWalkable = v;
+    }
 }

@@ -92,6 +92,12 @@ namespace Assets.Scripts.Grid_System
                         continue;
                     }
 
+                    //if (neighbourNode == null)
+                    //{
+                    //    //Debug.Log(GetNeighbourList(currentNode).Count);
+                    //    Debug.Log("NULL");
+                    //}
+
                     if (!neighbourNode.isWalkable)
                     {
                         closedList.Add(neighbourNode);
@@ -129,7 +135,7 @@ namespace Assets.Scripts.Grid_System
                 {
                     neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y - 1));
                 }
-                if (currentNode.y + 1 >= 0)
+                if (currentNode.y + 1 < grid.GetHeight())
                 {
                     neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y + 1));
                 }
@@ -143,7 +149,7 @@ namespace Assets.Scripts.Grid_System
                 {
                     neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y - 1));
                 }
-                if (currentNode.y + 1 >= 0)
+                if (currentNode.y + 1 < grid.GetHeight())
                 {
                     neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y + 1));
                 }
@@ -154,7 +160,7 @@ namespace Assets.Scripts.Grid_System
                 neighbourList.Add(GetNode(currentNode.x, currentNode.y - 1));
             }
 
-            if (currentNode.y + 1 >= 0)
+            if (currentNode.y + 1 < grid.GetHeight())
             {
                 neighbourList.Add(GetNode(currentNode.x, currentNode.y + 1));
             }
